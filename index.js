@@ -31,6 +31,7 @@ async function run(){
         //creating database and collections
      const database = client.db('Portfolios');
      const ProjectCollection = database.collection('Projects');
+     const BlogsCollection = database.collection('blogs');
 
      ///////////////////////
      //getting all Projects
@@ -47,6 +48,22 @@ async function run(){
            const query={_id:ObjectId(id)};
            const project=await ProjectCollection.findOne(query);
            res.send(project);
+       });
+
+       //getting all Projects
+     app.get('/allblogs',async (req,res) => {
+        const cursor =BlogsCollection.find({});
+        const allblogs=await cursor.toArray();
+        res.send(allblogs);
+    });
+ 
+  
+       //getting project with dynamic id
+       app.get('/blogs/:id',async (req,res) => {
+           const id=req.params.id;
+           const query={_id:ObjectId(id)};
+           const blog=await BlogsCollection.findOne(query);
+           res.send(blog);
        });
 
     
