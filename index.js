@@ -37,10 +37,10 @@ async function run() {
       const projects = await cursor.toArray();
       res.send(projects);
     });
-    //user review adding to databset
+    //projeccts adding to databset
     app.post("/addproject", async (req, res) => {
       const projectdetails = req.body;
-      const projectresult = await reviewCollection.insertOne(projectdetails);
+      const projectresult = await ProjectCollection.insertOne(projectdetails);
       // console.log(carresult);
       res.json(projectresult);
     });
@@ -66,6 +66,14 @@ async function run() {
       const query = { _id: ObjectId(id) };
       const blog = await BlogsCollection.findOne(query);
       res.send(blog);
+    });
+
+    //projeccts adding to databset
+    app.post("/addblog", async (req, res) => {
+      const projectdetails = req.body;
+      const projectresult = await BlogsCollection.insertOne(projectdetails);
+      // console.log(carresult);
+      res.json(projectresult);
     });
   } finally {
   }
